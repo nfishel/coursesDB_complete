@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true)%}
+  {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>Message:</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+<h2>ALL COURSES</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Course Name</th>
+      <th scope="col">Teacher</th>
+      <th scope="col">Room</th>
+      <th scope="col">Department</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course in courses %}
+    <tr>
+      <td>{{ course.name }}</td>
+      <td>{{ course.teacher }}</td>
+      <td>{{ course.room }}</td>
+      <td>{{ course.dept }}</td>
+      <td>
+        <a href="/edit/{{course.id}}">
+          <i class="bi bi-pencil-square"></i>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
